@@ -14,13 +14,22 @@ class GalleryImageSerializer(serializers.ModelSerializer):
         model = GalleryImage
         fields = ['id', 'image']
 
+# class PortfolioSerializer(serializers.ModelSerializer):
+#     gallery_images = GalleryImageSerializer(many=True, read_only=True)
+
+#     class Meta:
+#         model = Portfolio
+#         fields = '__all__'
+
 class PortfolioSerializer(serializers.ModelSerializer):
+    profile_pic = serializers.ImageField(use_url=True, required=False)
+    logo = serializers.ImageField(use_url=True, required=False)
+    project_img = serializers.ImageField(use_url=True, required=False)
     gallery_images = GalleryImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Portfolio
         fields = '__all__'
-
 
 
 class ContactMessageSerializer(serializers.ModelSerializer):
